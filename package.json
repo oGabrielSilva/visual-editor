@@ -45,7 +45,7 @@
     "format": "prettier --write src playground tests scripts *.ts *.mjs",
     "format:check": "prettier --check src playground tests scripts *.ts *.mjs",
     "validate": "yarn format:check && yarn typecheck && yarn lint && yarn build && yarn test",
-    "prepack": "yarn build"
+    "prepack": "node .yarn/releases/yarn-4.18.0.cjs build"
   },
   "dependenciesMeta": {
     "esbuild": {
