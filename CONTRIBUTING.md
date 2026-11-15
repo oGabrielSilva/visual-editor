@@ -38,7 +38,8 @@ rodando, gere-as com `node website/capture.mjs http://127.0.0.1:6041`.
 ## Publicação no npm
 
 Uma release publicada no GitHub dispara `.github/workflows/publish.yml`, que valida, gera e
-publica o pacote com proveniência. O repositório precisa do segredo `NPM_TOKEN`.
+publica o pacote com proveniência. A autenticação é pelo Trusted Publishing do npm: nenhum
+token fica guardado no repositório. Antes de criar a release, suba a versão no `package.json`.
 
 ## Convenções
 

@@ -1,6 +1,8 @@
 # Publishes @lyads/visual-editor to npm when a GitHub release is published.
-# Requires the repository secret NPM_TOKEN (an npm automation token with publish rights on the
-# @lyads scope). The package is published with provenance.
+# Authentication uses npm Trusted Publishing (OpenID Connect): no token is stored in the
+# repository, and npm adds provenance automatically. The trusted publisher is set on npmjs.com:
+# package settings > Trusted Publisher > GitHub Actions, repository oGabrielSilva/visual-editor,
+# workflow publish.yml.
 name: Publish
 
 on:
@@ -18,11 +20,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: https://registry.npmjs.org
+      # Trusted Publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
       - run: corepack enable
       - run: yarn install --immutable
       - run: yarn validate
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public
