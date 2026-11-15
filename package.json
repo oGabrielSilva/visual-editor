@@ -122,7 +122,6 @@
     "drag-and-drop"
   ],
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }
