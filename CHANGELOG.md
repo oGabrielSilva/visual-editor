@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+- Publicação pelo GitHub Actions com Trusted Publishing e proveniência do npm.
+- A geração antes de empacotar usa o Yarn do próprio repositório, sem depender do Yarn global.
+- Sem mudança de comportamento no editor.
+
 ## 1.0.1
 
 Primeira versão pública.

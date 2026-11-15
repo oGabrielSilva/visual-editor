@@ -1,7 +1,7 @@
 {
   "name": "@lyads/visual-editor",
   "packageManager": "yarn@4.18.0",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Vue visual and HTML editor for e-mails and landing pages, with block documents and MJML output",
   "license": "Apache-2.0",
