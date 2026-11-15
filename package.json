@@ -1,0 +1,128 @@
+{
+  "name": "@lyads/visual-editor",
+  "packageManager": "yarn@4.18.0",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Vue visual and HTML editor for e-mails and landing pages, with block documents and MJML output",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "files": [
+    "/dist",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+    "/NOTICE",
+    "/THIRD_PARTY_NOTICES.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/composition/browser.d.ts",
+      "import": "./dist/browser.js"
+    },
+    "./server": {
+      "types": "./dist/composition/server.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/public.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./styles.css": "./dist/visual-editor.css"
+  },
+  "scripts": {
+    "dev": "vite --config vite.playground.config.ts --host 127.0.0.1",
+    "preview": "vite preview --config vite.playground.config.ts --host 127.0.0.1 --port 6011 --strictPort",
+    "runtime": "node scripts/canvas-runtime.mjs",
+    "runtime:check": "node scripts/canvas-runtime.mjs --check",
+    "build": "node scripts/canvas-runtime.mjs && vite build && vue-tsc -p tsconfig.build.json && vite build --config vite.playground.config.ts",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint src playground tests --max-warnings=0",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:architecture": "vitest run tests/architecture",
+    "format": "prettier --write src playground tests scripts *.ts *.mjs",
+    "format:check": "prettier --check src playground tests scripts *.ts *.mjs",
+    "validate": "yarn format:check && yarn typecheck && yarn lint && yarn build && yarn test",
+    "prepack": "yarn build"
+  },
+  "dependenciesMeta": {
+    "esbuild": {
+      "built": true
+    }
+  },
+  "dependencies": {
+    "@codemirror/commands": "6.11.1",
+    "@codemirror/lang-css": "6.3.1",
+    "@codemirror/lang-html": "6.4.12",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.14",
+    "@floating-ui/dom": "1.8.0",
+    "@iconify-json/lucide": "1.2.103",
+    "@iconify/vue": "5.0.3",
+    "@nuxt/ui": "4.8.1",
+    "@tiptap/core": "3.31.4",
+    "@tiptap/extension-text-style": "3.31.4",
+    "@tiptap/pm": "3.31.4",
+    "@tiptap/starter-kit": "3.31.4",
+    "@tiptap/vue-3": "3.31.4",
+    "codemirror": "6.0.2",
+    "css-tree": "3.2.1",
+    "mjml": "5.4.1",
+    "mjml-browser": "5.4.1",
+    "parse5": "8.0.1",
+    "valibot": "1.4.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.62.1",
+    "@types/css-tree": "3.2.0",
+    "@types/mjml": "5.0.0",
+    "@types/node": "24",
+    "@vitejs/plugin-vue": "6.0.10",
+    "@vitest/coverage-v8": "4.1.11",
+    "esbuild": "0.28.1",
+    "eslint": "10.12.0",
+    "eslint-plugin-vue": "10.11.1",
+    "globals": "17.13.0",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vite": "8.3.4",
+    "vitest": "4.1.11",
+    "vue": "3.5.43",
+    "vue-eslint-parser": "10.4.1",
+    "vue-router": "5.0.6",
+    "vue-tsc": "3.2.7"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0",
+    "vue-router": "^4.6.0 || ^5.0.0"
+  },
+  "author": "Gabriel Silva (https://github.com/oGabrielSilva)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oGabrielSilva/visual-editor.git"
+  },
+  "homepage": "https://ogabrielsilva.github.io/visual-editor/",
+  "bugs": {
+    "url": "https://github.com/oGabrielSilva/visual-editor/issues"
+  },
+  "keywords": [
+    "visual-editor",
+    "email-editor",
+    "page-builder",
+    "landing-page",
+    "mjml",
+    "vue",
+    "vue3",
+    "nuxt-ui",
+    "wysiwyg",
+    "drag-and-drop"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

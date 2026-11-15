@@ -1,0 +1,6 @@
+# The site is public documentation of an open-source project: every crawler is welcome,
+# including search engines and AI assistants.
+User-agent: *
+Allow: /
+
+Sitemap: https://ogabrielsilva.github.io/visual-editor/sitemap.xml

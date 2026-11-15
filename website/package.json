@@ -1,0 +1,21 @@
+{
+  "name": "visual-editor-site",
+  "private": true,
+  "type": "module",
+  "packageManager": "yarn@4.18.0",
+  "scripts": {
+    "dev": "nuxt dev --port 6050",
+    "playground": "node build-playground.mjs",
+    "generate": "nuxt generate && node build-docs.mjs",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "1.2.103",
+    "@iconify-json/simple-icons": "^1.2.102",
+    "@nuxt/ui": "4.8.1",
+    "@nuxtjs/mdc": "0.23.3",
+    "nuxt": "4.6.4",
+    "tailwindcss": "4.1.18",
+    "typescript": "^7.0.2"
+  }
+}

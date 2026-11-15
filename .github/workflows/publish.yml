@@ -1,0 +1,28 @@
+# Publishes @lyads/visual-editor to npm when a GitHub release is published.
+# Requires the repository secret NPM_TOKEN (an npm automation token with publish rights on the
+# @lyads scope). The package is published with provenance.
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn validate
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

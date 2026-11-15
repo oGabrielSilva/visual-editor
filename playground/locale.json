@@ -1,0 +1,21 @@
+{
+  "title": "Editor de e-mail e landing pages",
+  "note": "Ambiente de teste com o tema de um aplicativo hospedeiro de exemplo. O salvamento dura até recarregar a página.",
+  "page": "Landing page",
+  "email": "E-mail",
+  "light": "Tema claro",
+  "dark": "Tema escuro",
+  "readonly": "Somente leitura",
+  "reopen": "Reabrir documento salvo",
+  "textPiece": "Peça de texto",
+  "textPieceLoaded": "Peça de texto carregada",
+  "reopened": "Documento reaberto",
+  "missing": "Salve um documento antes de reabrir.",
+  "initialError": "Falha ao preparar o modelo. Importe um arquivo ou adicione um bloco.",
+  "brand": "Aplicativo de exemplo",
+  "controls": "Controles do ambiente de teste",
+  "libraryTitle": "Biblioteca de imagens de exemplo",
+  "libraryDescription": "Imagens fictícias servidas por esta página. Escolha uma para usar na peça.",
+  "blocks": "Editor em blocos",
+  "html": "Editor HTML"
+}

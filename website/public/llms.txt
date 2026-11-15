@@ -1,0 +1,23 @@
+# Lyads Visual Editor
+
+> Open-source (Apache-2.0) visual editor for e-mails and landing pages, for Vue 3. The package is `@lyads/visual-editor`. Authors edit text in place, arrange blocks, swap images and edit HTML; the host application gets a validated JSON document and generated output (MJML-compiled HTML for e-mails, HTML and CSS for pages). Documentation is written in Brazilian Portuguese; code and comments are in English.
+
+Key facts for code assistants:
+
+- Two document formats: schema 1 (validated HTML document tree, visual and code modes over one history) and schema 2 (block piece: sections, columns, text, heading, image, button, divider, spacer, footer, form, free HTML; global styles; optional `mobile` values per block).
+- Entry points: `@lyads/visual-editor` (browser factories `createEditor`, `createBlockEditor`), `@lyads/visual-editor/vue` (components `VisualEditor`, `BlockVisualEditor`), `@lyads/visual-editor/server` (`createServerEditor`, `createServerBlockToolkit`, no Vue), `@lyads/visual-editor/styles.css`.
+- The host provides ports: `store` (save with revision), `imagePicker`, `savedBlocks`, `variables`, `messages`. Authorization, persistence, sending and publishing belong to the host.
+- Security: the editing frame is a sandboxed iframe with a hash-pinned script; e-mails are sanitized; pages keep the author's scripts by design, so published pages must be served from a separate origin. Always revalidate on the server with `@lyads/visual-editor/server`.
+
+## Docs
+
+- [README](docs/README.md): features, installation, usage of both editors and the server toolkit, host ports, limits.
+- [Architecture](docs/architecture.md): source layers, the two document formats, the editing frame and integration points.
+- [Security](docs/security.md): what the package guarantees and what the integrator must do.
+- [Contributing](docs/CONTRIBUTING.md): environment, commands, conventions.
+
+## Optional
+
+- [Changelog](docs/CHANGELOG.md)
+- [Security policy](docs/security-policy.md): how to report a vulnerability.
+- [Full documentation in one file](llms-full.txt)

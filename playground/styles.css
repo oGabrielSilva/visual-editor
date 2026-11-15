@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+@import '../src/vue/styles.css';
+
+/* The page around the editor: a host application reduced to a bar of controls. */
+body {
+  margin: 0;
+}
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1920px;
+  /* Exactly one screen: the editor takes what the bar above leaves, and only its panels scroll. */
+  box-sizing: border-box;
+  height: 100dvh;
+  overflow: auto;
+  margin: 0 auto;
+  padding: 8px;
+  color: var(--ui-text);
+  background: var(--ui-bg-muted);
+  font-family: var(--font-sans);
+}
+.playground-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 4px;
+}
+.playground-header h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.playground-header p {
+  margin: 0;
+  color: var(--ui-text-muted);
+  font-size: 12px;
+}
+.playground-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.playground-notice {
+  margin: 0;
+  padding: 0 4px;
+  color: var(--ui-text-muted);
+  font-size: 12px;
+}
+.playground .visual-editor {
+  --editor-height: auto;
+  flex: 1 1 0;
+  /* Below this the page scrolls instead of squeezing the editor. */
+  min-height: 560px;
+}
+.playground-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.playground-image {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: 6px;
+  color: inherit;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  cursor: pointer;
+  font-size: 12px;
+  text-align: start;
+}
+.playground-image:hover,
+.playground-image:focus-visible {
+  border-color: var(--ui-primary);
+  outline: none;
+}
+.playground-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

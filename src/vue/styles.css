@@ -1,0 +1,871 @@
+/*
+ * Layout of the shell and of the editing area only. Colors, radius, typography and the look of
+ * every control come from the Nuxt UI theme of the host: nothing here defines a brand.
+ */
+.visual-editor {
+  /* Aliases kept for hosts which styled the previous shell through these names. */
+  --editor-accent: var(--ui-primary);
+  --editor-surface: var(--ui-bg);
+  --editor-background: var(--ui-bg-muted);
+  --editor-text: var(--ui-text);
+  --editor-muted: var(--ui-text-muted);
+  --editor-border: var(--ui-border);
+  --editor-radius: var(--ui-radius);
+  --editor-left: 272px;
+  --editor-right: 304px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: var(--editor-height, clamp(600px, 100dvh, 1040px));
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--ui-text);
+  background: var(--ui-bg-muted);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  font-family: var(--editor-font, inherit);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.visual-editor *,
+.visual-editor *::before,
+.visual-editor *::after {
+  box-sizing: border-box;
+}
+.visual-editor button:disabled,
+.visual-editor [aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+/* Top bar and status line */
+.visual-editor .editor-toolbar {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  min-width: 0;
+  padding: 8px 12px;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-inline-end: 4px;
+}
+.visual-editor .editor-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--ui-text-inverted);
+  background: var(--ui-primary);
+  border-radius: var(--ui-radius);
+  font-weight: 700;
+}
+.visual-editor .editor-brand-name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.visual-editor .editor-history,
+.visual-editor .editor-preview-controls,
+.visual-editor .editor-block-actions,
+.visual-editor .editor-keys {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.visual-editor .editor-separator {
+  align-self: stretch;
+  height: auto;
+  min-height: 20px;
+}
+.visual-editor .editor-toolbar-space {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.visual-editor .editor-status,
+.visual-editor .editor-source-state {
+  color: var(--ui-text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.visual-editor .editor-file-input,
+.visual-editor .editor-mobile-trigger {
+  display: none;
+}
+.visual-editor .editor-statusbar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 32px;
+  padding: 0 12px;
+  color: var(--ui-text-muted);
+  background: var(--ui-bg);
+  border-top: 1px solid var(--ui-border);
+  font-size: 12px;
+}
+/* Reserved line: a message appearing or leaving never moves the piece. */
+.visual-editor .editor-feedback {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.visual-editor .editor-diagnostics {
+  display: grid;
+  gap: 8px;
+}
+.visual-editor .editor-notice-list {
+  padding: 12px;
+}
+.visual-editor .editor-document-metadata {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.visual-editor .editor-diagnostics,
+.visual-editor .editor-recovery-banner {
+  flex: none;
+  max-height: 30%;
+  padding: 8px 12px;
+  overflow-y: auto;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-diagnostic-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.visual-editor .editor-diagnostic-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+/* Work area: panels and the editing area */
+.visual-editor .editor-workspace {
+  display: grid;
+  flex: 1 1 0;
+  grid-template-columns: var(--editor-left) minmax(0, 1fr) var(--editor-right);
+  min-height: 0;
+}
+.visual-editor.is-html .editor-workspace {
+  grid-template-columns: var(--editor-left) minmax(0, 1fr);
+}
+/* The HTML mode has no selected block: the room of its panel goes to the code. */
+.visual-editor.is-html .editor-side-panel.is-right {
+  display: none;
+}
+.visual-editor .editor-side-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--ui-bg);
+}
+.visual-editor .editor-side-panel.is-left {
+  border-inline-end: 1px solid var(--ui-border);
+}
+.visual-editor .editor-side-panel.is-right {
+  border-inline-start: 1px solid var(--ui-border);
+}
+.visual-editor .editor-tabs,
+.visual-editor .editor-properties {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  min-height: 0;
+}
+.visual-editor .editor-tabs-list {
+  flex: none;
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-tabs-content {
+  flex: 1 1 0;
+  min-height: 0;
+}
+.visual-editor .editor-tabs-content[hidden],
+.visual-editor .editor-tabs-content[data-state='inactive'] {
+  display: none;
+}
+.visual-editor .editor-scroll {
+  height: 100%;
+  padding: 12px;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border-accented) transparent;
+}
+.visual-editor .editor-help,
+.visual-editor .editor-variable-hint {
+  margin: 6px 0;
+  color: var(--ui-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.visual-editor .editor-variable-hint {
+  margin: 0;
+  padding: 12px;
+}
+.visual-editor .editor-control-error,
+.visual-editor .editor-canvas-error {
+  color: var(--ui-error);
+  font-size: 12px;
+}
+
+/* Left panel: palette, models and structure */
+/* A folded group is out of the way at once, in every engine and without waiting for a motion. */
+.visual-editor .editor-property-groups [data-slot='content'][data-state='closed'] {
+  display: none;
+}
+.visual-editor .editor-palette {
+  display: grid;
+  gap: 4px;
+}
+.visual-editor .editor-palette-position {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.visual-editor .editor-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.visual-editor .editor-palette-block {
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 6px;
+  cursor: grab;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+}
+.visual-editor .editor-template-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.visual-editor .editor-template {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 8px;
+  color: inherit;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  cursor: pointer;
+  text-align: start;
+}
+.visual-editor .editor-template:hover:not(:disabled) {
+  border-color: var(--ui-primary);
+}
+.visual-editor .editor-template:focus-visible {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 2px;
+}
+.visual-editor .editor-template > span:last-child {
+  color: var(--ui-text-muted);
+  font-size: 12px;
+}
+.visual-editor .editor-template-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 132px;
+  overflow: hidden;
+  background: var(--ui-bg-muted);
+  pointer-events: none;
+}
+.visual-editor .editor-template-thumbnail iframe {
+  display: block;
+  border: 0;
+  transform-origin: top left;
+}
+.visual-editor .editor-template-skeleton {
+  width: 100%;
+  height: 100%;
+}
+.visual-editor .editor-template-confirm-preview {
+  height: 240px;
+}
+.visual-editor .editor-structure {
+  position: relative;
+  user-select: none;
+}
+/* A deep hierarchy keeps room for its names: the indentation is short and stops growing. */
+.visual-editor .editor-tree [data-slot='listWithChildren'] {
+  margin-inline-start: 8px;
+}
+.visual-editor .editor-tree ul ul ul ul ul ul ul [data-slot='listWithChildren'] {
+  margin-inline-start: 0;
+}
+/* Only the rows on screen are drawn in a long piece: the list then scrolls on its own. */
+.visual-editor .editor-structure.is-virtual .editor-tree {
+  height: min(68dvh, 720px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border-accented) transparent;
+}
+.visual-editor .editor-tree-row {
+  gap: 6px;
+  min-width: 0;
+}
+.visual-editor .editor-tree-label {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.visual-editor .editor-tree-detail {
+  margin-inline-start: 6px;
+  color: var(--ui-text-dimmed);
+  font-weight: 400;
+}
+.visual-editor .editor-structure-drop {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--ui-primary);
+}
+.visual-editor .editor-structure-drop.is-inside {
+  background: color-mix(in srgb, var(--ui-primary) 14%, transparent);
+  outline: 2px solid var(--ui-primary);
+  outline-offset: -2px;
+}
+
+/* Right panel: the selected block */
+.visual-editor .editor-selected {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px 6px;
+}
+.visual-editor .editor-selected-text {
+  display: grid;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.visual-editor .editor-selected-kind,
+.visual-editor .editor-selected-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* The heading of the block panel, which takes the keyboard after remove, back or parent. */
+.visual-editor h2.editor-selected-kind {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: inherit;
+}
+.visual-editor h2.editor-selected-kind:focus-visible,
+.visual-editor .editor-properties[tabindex='-1']:focus-visible {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 2px;
+}
+.visual-editor .editor-selected-title {
+  color: var(--ui-text-muted);
+  font-size: 12px;
+}
+.visual-editor .editor-property-content,
+.visual-editor .editor-property-style,
+.visual-editor .editor-property-advanced,
+.visual-editor .editor-richtext-colors,
+.visual-editor .editor-richtext-link,
+.visual-editor .editor-color-control,
+.visual-editor .editor-color-picker,
+.visual-editor .editor-measurement,
+.visual-editor .editor-shortcuts {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.visual-editor .editor-richtext-colors,
+.visual-editor .editor-richtext-link,
+.visual-editor .editor-color-picker,
+.visual-editor .editor-shortcuts {
+  padding: 12px;
+}
+.visual-editor .editor-field {
+  min-width: 0;
+}
+.visual-editor .editor-field-group {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.visual-editor .editor-field-label {
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.visual-editor .editor-field-hidden-label [data-slot='labelWrapper'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.visual-editor .editor-field-hidden-label [data-slot='labelWrapper'] + [data-slot='container'] {
+  margin-top: 0;
+}
+.visual-editor .editor-input,
+.visual-editor .editor-select {
+  display: flex;
+  width: 100%;
+}
+.visual-editor .editor-color-inputs {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px;
+}
+.visual-editor .editor-measurement-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 84px;
+  gap: 6px;
+}
+.visual-editor .editor-color-swatch {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--ui-border-accented);
+  border-radius: calc(var(--ui-radius) * 0.5);
+}
+.visual-editor .editor-authoring-controls {
+  min-width: 0;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+  border: 0;
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-column-weights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.visual-editor .editor-shortcuts dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.visual-editor .editor-shortcuts dl > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.visual-editor .editor-shortcuts dd {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+/* Editing area */
+.visual-editor .editor-canvas-area,
+.visual-editor .editor-canvas-surface {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.visual-editor .editor-canvas-surface {
+  position: relative;
+}
+/* The path never scrolls: its middle levels fold into one menu. */
+.visual-editor .editor-canvas-breadcrumb {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 36px;
+  min-width: 0;
+  padding: 0 8px;
+  overflow: hidden;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-path {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.visual-editor .editor-path-idle {
+  overflow: hidden;
+  color: var(--ui-text-dimmed);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* A fixed strip of the shell above the piece: never over it, and always present. */
+.visual-editor .editor-canvas-text-bar {
+  position: relative;
+  z-index: 3;
+  flex: none;
+  min-height: 44px;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-richtext-toolbar,
+.visual-editor .editor-text-toolbar,
+.visual-editor .editor-text-toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+.visual-editor .editor-richtext-toolbar {
+  min-height: 43px;
+  padding: 4px 8px;
+}
+.visual-editor .editor-text-toolbar-group + .editor-text-toolbar-group {
+  margin-inline-start: 6px;
+}
+.visual-editor .editor-canvas-stage,
+.visual-editor .editor-preview-area {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+  padding: 16px;
+  overflow: hidden;
+}
+.visual-editor .editor-preview-shell {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: #fff;
+  border: 1px solid var(--ui-border);
+}
+.visual-editor .editor-preview-shell.is-tablet {
+  max-width: 768px;
+}
+.visual-editor .editor-preview-shell.is-mobile {
+  max-width: 375px;
+}
+.visual-editor .editor-preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: 0;
+  pointer-events: none;
+}
+.visual-editor .editor-selection-preview {
+  pointer-events: auto;
+}
+.visual-editor .editor-canvas-surface.is-palette-dragging iframe.editor-selection-preview {
+  pointer-events: none;
+}
+.visual-editor .editor-canvas-failure {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  overflow: auto;
+  color: var(--ui-text);
+  text-align: center;
+  background: var(--ui-bg);
+}
+.visual-editor .editor-file-drop {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+.visual-editor .editor-canvas-error {
+  flex: none;
+  margin: 0;
+  padding: 6px 12px;
+  background: var(--ui-bg);
+  border-top: 1px solid var(--ui-border);
+}
+
+/* HTML mode */
+.visual-editor .editor-source-pane {
+  display: flex;
+  flex: 3 1 0;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding: 12px;
+  overflow-y: auto;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border-accented) transparent;
+}
+.visual-editor.is-html .editor-preview-area {
+  flex: 2 1 0;
+}
+.visual-editor .editor-source-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.visual-editor .editor-source-state {
+  flex: 1 1 auto;
+}
+.visual-editor .editor-code {
+  overflow: hidden;
+  border: 1px solid var(--ui-border-accented);
+  border-radius: var(--ui-radius);
+}
+.visual-editor .editor-code:focus-within {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 1px;
+}
+.visual-editor .editor-code .cm-editor {
+  max-height: 46vh;
+  font-size: 12.5px;
+}
+.visual-editor .editor-code .cm-editor.cm-focused {
+  outline: none;
+}
+.visual-editor .editor-code .cm-scroller {
+  overflow: auto;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  scrollbar-width: thin;
+}
+/* The syntax palette of the code editor is made for a light page: on a dark one it is mirrored. */
+.dark .visual-editor .editor-code .cm-line > span,
+.visual-editor.dark .editor-code .cm-line > span {
+  filter: invert(1) hue-rotate(180deg);
+}
+@media (min-width: 1280px) {
+  .visual-editor.is-html .editor-canvas-area {
+    flex-direction: row;
+  }
+  .visual-editor.is-html .editor-source-pane {
+    flex: 1 1 0;
+    border-right: 1px solid var(--ui-border);
+    border-bottom: 0;
+  }
+  .visual-editor.is-html .editor-preview-area {
+    flex: 1 1 0;
+  }
+  .visual-editor.is-html .editor-code .cm-editor {
+    max-height: 60vh;
+  }
+}
+
+/* Text of the panel editor */
+.visual-editor .editor-richtext {
+  min-width: 0;
+}
+.visual-editor .editor-property-content .editor-richtext {
+  overflow: hidden;
+  border: 1px solid var(--ui-border-accented);
+  border-radius: var(--ui-radius);
+}
+.visual-editor .editor-property-content .editor-richtext:focus-within {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 1px;
+}
+.visual-editor .editor-property-content .editor-richtext-toolbar {
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-richtext-content {
+  min-height: 96px;
+  padding: 10px;
+  outline: none;
+}
+.visual-editor .editor-richtext-content p {
+  margin: 0 0 8px;
+}
+.visual-editor .editor-richtext-content ul,
+.visual-editor .editor-richtext-content ol {
+  padding-inline-start: 20px;
+}
+.visual-editor .editor-richtext-content ul {
+  list-style: disc;
+}
+.visual-editor .editor-richtext-content ol {
+  list-style: decimal;
+}
+
+/* Layers: menus above the piece, drawers above the shell, dialogs above everything */
+.visual-editor .editor-menu-anchor {
+  position: fixed;
+  pointer-events: none;
+}
+.visual-editor .editor-menu-content,
+.visual-editor .editor-context-popover-surface {
+  z-index: 110;
+}
+.visual-editor .editor-context-popover-content {
+  width: min(320px, var(--reka-popper-available-width, 320px), calc(100vw - 32px));
+  max-height: min(440px, var(--reka-popper-available-height, 440px), calc(100dvh - 48px));
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.visual-editor .editor-panel-overlay {
+  z-index: 98;
+}
+.visual-editor .editor-panel-dialog {
+  z-index: 99;
+  width: min(360px, 100vw);
+}
+.visual-editor .editor-panel-dialog-body {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.visual-editor .editor-panel-dialog-content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.visual-editor .editor-confirm-overlay {
+  z-index: 120;
+}
+.visual-editor .editor-confirm-dialog {
+  z-index: 121;
+}
+.visual-editor .editor-confirm-dialog.is-wide {
+  width: min(820px, calc(100vw - 32px));
+  max-width: none;
+}
+.visual-editor .editor-confirm-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 1180px) {
+  .visual-editor {
+    --editor-left: 236px;
+    --editor-right: 264px;
+  }
+  .visual-editor .editor-brand-name,
+  .visual-editor .editor-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+@media (max-width: 900px) {
+  .visual-editor .editor-workspace,
+  .visual-editor.is-html .editor-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .visual-editor .editor-side-panel {
+    display: none;
+  }
+  .visual-editor .editor-mobile-trigger {
+    display: inline-flex;
+  }
+  .visual-editor .editor-canvas-stage,
+  .visual-editor .editor-preview-area {
+    padding: 8px;
+  }
+  .visual-editor .editor-toolbar {
+    padding: 8px;
+  }
+}
+@media (pointer: coarse) {
+  .visual-editor button,
+  .visual-editor [role='combobox'],
+  .visual-editor [role='tab'],
+  .visual-editor [role='treeitem'],
+  .visual-editor [role='checkbox'],
+  .visual-editor [role='switch'],
+  .visual-editor input:not([type='file']) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visual-editor * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Device editing and the review before sending. */
+.visual-editor .editor-device-notice {
+  margin: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ui-border);
+}
+.visual-editor .editor-device-marker {
+  display: flex;
+  margin-top: 4px;
+}
+.visual-editor .editor-review {
+  margin: 8px 0 16px;
+  padding: 12px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+}
+.visual-editor .editor-review:focus-visible {
+  outline: 2px solid var(--ui-primary);
+  outline-offset: 2px;
+}
+.visual-editor .editor-review-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+.visual-editor .editor-review-list {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.visual-editor .editor-review-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.visual-editor .editor-review-item[data-review-severity='error'] > .editor-icon {
+  color: var(--ui-error);
+}
+.visual-editor .editor-review-item[data-review-severity='warning'] > .editor-icon {
+  color: var(--ui-warning);
+}

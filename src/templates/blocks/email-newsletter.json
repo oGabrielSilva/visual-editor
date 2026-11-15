@@ -1,0 +1,126 @@
+{
+  "id": "email-newsletter",
+  "kind": "email",
+  "titleKey": "templates.newsletter",
+  "descriptionKey": "templates.newsletterDescription",
+  "document": {
+    "title": "",
+    "meta": {
+      "lang": "pt-BR"
+    },
+    "styles": {},
+    "blocks": [
+      {
+        "id": "s1",
+        "type": "section",
+        "props": {
+          "padding": "32px 0"
+        },
+        "children": [
+          {
+            "id": "s1c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s1t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>NOVIDADES</p>",
+                  "fontSize": "12px",
+                  "color": "#0d766e"
+                }
+              },
+              {
+                "id": "s1h1",
+                "type": "heading",
+                "props": {
+                  "text": "Olá, Nico Robin",
+                  "level": "h1"
+                }
+              },
+              {
+                "id": "s1t2",
+                "type": "text",
+                "props": {
+                  "text": "<p>Reunimos as novidades para sua próxima conversa. Edite esta mensagem antes de enviar.</p>"
+                }
+              },
+              {
+                "id": "s1d1",
+                "type": "divider",
+                "props": {}
+              },
+              {
+                "id": "s1h2",
+                "type": "heading",
+                "props": {
+                  "text": "O destaque do mês",
+                  "fontSize": "22px"
+                }
+              },
+              {
+                "id": "s1t3",
+                "type": "text",
+                "props": {
+                  "text": "<p>Conte uma novidade relevante e convide as pessoas a conhecer mais.</p>"
+                }
+              },
+              {
+                "id": "s1b1",
+                "type": "button",
+                "props": {
+                  "text": "Conhecer as novidades",
+                  "href": "https://example.com/novidades"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "type": "section",
+        "props": {
+          "background": "transparent"
+        },
+        "children": [
+          {
+            "id": "s2c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s2f1",
+                "type": "footer",
+                "props": {
+                  "text": "<p>Mensagem de exemplo. O rodapé de envio é fornecido pelo aplicativo.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translations": {
+    "en": {
+      "s1t1": "<p>WHAT IS NEW</p>",
+      "s1h1": "Hello, Nico Robin",
+      "s1t2": "<p>Here is what is new for your next conversation. Edit this message before sending it.</p>",
+      "s1h2": "The highlight of the month",
+      "s1t3": "<p>Share something relevant and invite people to learn more.</p>",
+      "s1b1": "See what is new",
+      "s2f1": "<p>Sample message. The sending footer is added by the application.</p>"
+    },
+    "es": {
+      "s1t1": "<p>NOVEDADES</p>",
+      "s1h1": "Hola, Nico Robin",
+      "s1t2": "<p>Reunimos las novedades para tu próxima conversación. Edita este mensaje antes de enviarlo.</p>",
+      "s1h2": "Lo destacado del mes",
+      "s1t3": "<p>Cuenta una novedad relevante e invita a las personas a conocer más.</p>",
+      "s1b1": "Conocer las novedades",
+      "s2f1": "<p>Mensaje de ejemplo. El pie de envío lo agrega la aplicación.</p>"
+    }
+  }
+}

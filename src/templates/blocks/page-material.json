@@ -1,0 +1,191 @@
+{
+  "id": "page-material",
+  "kind": "page",
+  "titleKey": "templates.material",
+  "descriptionKey": "templates.materialDescription",
+  "document": {
+    "title": "",
+    "meta": {
+      "lang": "pt-BR"
+    },
+    "styles": {},
+    "blocks": [
+      {
+        "id": "s1",
+        "type": "section",
+        "props": {
+          "padding": "48px 0"
+        },
+        "children": [
+          {
+            "id": "s1c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s1t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>MATERIAL GRATUITO</p>",
+                  "fontSize": "12px"
+                }
+              },
+              {
+                "id": "s1h1",
+                "type": "heading",
+                "props": {
+                  "text": "Uma ideia para o seu próximo passo",
+                  "level": "h1",
+                  "fontSize": "48px"
+                }
+              },
+              {
+                "id": "s1t2",
+                "type": "text",
+                "props": {
+                  "text": "<p>Apresente o conteúdo e mostre como ele pode ajudar quem chega até esta página.</p>"
+                }
+              },
+              {
+                "id": "s1b1",
+                "type": "button",
+                "props": {
+                  "text": "Receber o material",
+                  "href": "#interesse",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s2c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s2h1",
+                "type": "heading",
+                "props": {
+                  "text": "O que você vai encontrar"
+                }
+              },
+              {
+                "id": "s2t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>Uma apresentação objetiva para transformar interesse em ação.</p>"
+                }
+              }
+            ]
+          },
+          {
+            "id": "s2c2",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s2h2",
+                "type": "heading",
+                "props": {
+                  "text": "Para quem é"
+                }
+              },
+              {
+                "id": "s2t2",
+                "type": "text",
+                "props": {
+                  "text": "<p>Descreva a pessoa que mais se beneficia deste conteúdo.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s3c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s3h1",
+                "type": "heading",
+                "props": {
+                  "text": "Receba o conteúdo"
+                }
+              },
+              {
+                "id": "s3f1",
+                "type": "form",
+                "props": {}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s4c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s4d1",
+                "type": "divider",
+                "props": {}
+              },
+              {
+                "id": "s4f1",
+                "type": "footer",
+                "props": {
+                  "text": "<p>Conteúdo de demonstração. Edite antes de publicar.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translations": {
+    "en": {
+      "s1t1": "<p>FREE MATERIAL</p>",
+      "s1h1": "An idea for your next step",
+      "s1t2": "<p>Present the content and show how it can help whoever reaches this page.</p>",
+      "s1b1": "Get the material",
+      "s2h1": "What you will find",
+      "s2t1": "<p>A clear overview to turn interest into action.</p>",
+      "s2h2": "Who it is for",
+      "s2t2": "<p>Describe the person who benefits most from this content.</p>",
+      "s3h1": "Get the content",
+      "s4f1": "<p>Demonstration content. Edit it before publishing.</p>"
+    },
+    "es": {
+      "s1t1": "<p>MATERIAL GRATUITO</p>",
+      "s1h1": "Una idea para tu próximo paso",
+      "s1t2": "<p>Presenta el contenido y muestra cómo puede ayudar a quien llega a esta página.</p>",
+      "s1b1": "Recibir el material",
+      "s2h1": "Lo que vas a encontrar",
+      "s2t1": "<p>Una presentación objetiva para convertir el interés en acción.</p>",
+      "s2h2": "Para quién es",
+      "s2t2": "<p>Describe a la persona que más se beneficia de este contenido.</p>",
+      "s3h1": "Recibe el contenido",
+      "s4f1": "<p>Contenido de demostración. Edítalo antes de publicar.</p>"
+    }
+  }
+}

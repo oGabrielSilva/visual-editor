@@ -1,0 +1,44 @@
+{
+  "id": "email-blank",
+  "kind": "email",
+  "titleKey": "templates.blank",
+  "descriptionKey": "templates.blankDescription",
+  "document": {
+    "title": "",
+    "meta": {
+      "lang": "pt-BR"
+    },
+    "styles": {},
+    "blocks": [
+      {
+        "id": "s1",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s1c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s1t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>Escreva seu conteúdo.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translations": {
+    "en": {
+      "s1t1": "<p>Write your content.</p>"
+    },
+    "es": {
+      "s1t1": "<p>Escribe tu contenido.</p>"
+    }
+  }
+}

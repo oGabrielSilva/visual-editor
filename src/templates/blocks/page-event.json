@@ -1,0 +1,183 @@
+{
+  "id": "page-event",
+  "kind": "page",
+  "titleKey": "templates.event",
+  "descriptionKey": "templates.eventDescription",
+  "document": {
+    "title": "",
+    "meta": {
+      "lang": "pt-BR"
+    },
+    "styles": {
+      "button": {
+        "background": "#1f4e79"
+      },
+      "heading": {
+        "color": "#13253a"
+      }
+    },
+    "blocks": [
+      {
+        "id": "s1",
+        "type": "section",
+        "props": {
+          "padding": "48px 0"
+        },
+        "children": [
+          {
+            "id": "s1c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s1t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>ENCONTRO</p>",
+                  "fontSize": "12px"
+                }
+              },
+              {
+                "id": "s1h1",
+                "type": "heading",
+                "props": {
+                  "text": "Uma conversa que merece seu tempo",
+                  "level": "h1",
+                  "fontSize": "48px"
+                }
+              },
+              {
+                "id": "s1t2",
+                "type": "text",
+                "props": {
+                  "text": "<p>Apresente o tema do encontro e o que os participantes vão aprender.</p>"
+                }
+              },
+              {
+                "id": "s1b1",
+                "type": "button",
+                "props": {
+                  "text": "Quero participar",
+                  "href": "#inscricao",
+                  "align": "left"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s2c1",
+            "type": "column",
+            "props": {
+              "weight": 2
+            },
+            "children": [
+              {
+                "id": "s2h1",
+                "type": "heading",
+                "props": {
+                  "text": "Uma visão prática"
+                }
+              },
+              {
+                "id": "s2t1",
+                "type": "text",
+                "props": {
+                  "text": "<p>Compartilhe ideias que possam ser aplicadas no dia a dia.</p>"
+                }
+              }
+            ]
+          },
+          {
+            "id": "s2c2",
+            "type": "column",
+            "props": {
+              "weight": 1
+            },
+            "children": [
+              {
+                "id": "s2h2",
+                "type": "heading",
+                "props": {
+                  "text": "Espaço para perguntas"
+                }
+              },
+              {
+                "id": "s2t2",
+                "type": "text",
+                "props": {
+                  "text": "<p>Inclua as principais dúvidas na conversa.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "type": "section",
+        "props": {},
+        "children": [
+          {
+            "id": "s3c1",
+            "type": "column",
+            "props": {},
+            "children": [
+              {
+                "id": "s3h1",
+                "type": "heading",
+                "props": {
+                  "text": "Reserve seu lugar"
+                }
+              },
+              {
+                "id": "s3f1",
+                "type": "form",
+                "props": {}
+              },
+              {
+                "id": "s3f2",
+                "type": "footer",
+                "props": {
+                  "text": "<p>Conteúdo de demonstração.</p>"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "translations": {
+    "en": {
+      "s1t1": "<p>EVENT</p>",
+      "s1h1": "A conversation worth your time",
+      "s1t2": "<p>Present the topic of the event and what participants will learn.</p>",
+      "s1b1": "I want to join",
+      "s2h1": "A practical view",
+      "s2t1": "<p>Share ideas people can apply day to day.</p>",
+      "s2h2": "Room for questions",
+      "s2t2": "<p>Bring the main questions into the conversation.</p>",
+      "s3h1": "Save your seat",
+      "s3f2": "<p>Demonstration content.</p>"
+    },
+    "es": {
+      "s1t1": "<p>ENCUENTRO</p>",
+      "s1h1": "Una conversación que merece tu tiempo",
+      "s1t2": "<p>Presenta el tema del encuentro y lo que los participantes van a aprender.</p>",
+      "s1b1": "Quiero participar",
+      "s2h1": "Una visión práctica",
+      "s2t1": "<p>Comparte ideas que se puedan aplicar en el día a día.</p>",
+      "s2h2": "Espacio para preguntas",
+      "s2t2": "<p>Incluye las principales dudas en la conversación.</p>",
+      "s3h1": "Reserva tu lugar",
+      "s3f2": "<p>Contenido de demostración.</p>"
+    }
+  }
+}
