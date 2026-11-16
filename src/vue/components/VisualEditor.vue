@@ -11,6 +11,8 @@ import type { EditorThemeOptions } from '../theme';
 import { EditorIconRegistry } from '../icons';
 import { createWorkbench, WORKBENCH } from '../workbench';
 import type { EditorImagePicker } from '../services/image-requests';
+import { FORM_PREVIEWS, FormPreviewCache } from '../services/form-preview';
+import type { EditorFormPreview } from '../services/form-preview';
 import type { EditorVariable } from '../variables';
 import CanvasSurface from './CanvasSurface.vue';
 import EditorBlockMenus from './EditorBlockMenus.vue';
@@ -41,6 +43,8 @@ const props = defineProps<{
   variables?: readonly EditorVariable[];
   /** The image library of the host; takes precedence over `assetPicker`. */
   imagePicker?: EditorImagePicker;
+  /** Pictures of the forms connected to the piece, shown in their slots while editing. */
+  formPreview?: EditorFormPreview;
   /** Test mode: the preview reports whether entering a text changed its appearance. */
   diagnostics?: boolean;
 }>();
@@ -61,6 +65,9 @@ const workbench = createWorkbench({
   failed: (code) => emit('error', code),
 });
 provide(WORKBENCH, workbench);
+const formPreviews = new FormPreviewCache(() => props.formPreview);
+provide(FORM_PREVIEWS, formPreviews);
+onBeforeUnmount(() => formPreviews.dispose());
 const { state, busy, feedback } = workbench;
 const t = workbench.t;
 const theme = computed(() => new EditorTheme(props.theme).variables());

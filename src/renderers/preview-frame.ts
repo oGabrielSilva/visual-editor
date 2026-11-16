@@ -13,6 +13,8 @@ import {
 import { TEXT_FONT_FAMILIES } from '../security/text-presentation';
 import { sha256Base64 } from '../security/sha256';
 import { CanvasBridgeScript } from './canvas-bridge';
+import { FormPreviewInjector } from './form-preview';
+import type { FormPreviewLookup } from './form-preview';
 import type { CanvasBridgeLabels, CanvasBridgeRegion, CanvasBridgeTheme } from './canvas-bridge';
 import { documentParts } from './markup-tree';
 import type { MarkupElement } from './markup-tree';
@@ -48,6 +50,8 @@ export interface PreviewFrameOptions {
   readonly menu?: false;
   /** Friendly names of the variables of the host by key (at most 500, names up to 200). */
   readonly variables?: Readonly<Record<string, string>>;
+  /** Pictures of the connected forms, drawn inside their slots in the canvas only. */
+  readonly formPreview?: FormPreviewLookup;
 }
 
 const VARIABLE_KEY = /^[a-zA-Z0-9._]{1,200}$/;
@@ -236,6 +240,7 @@ export class PreviewFrameDocument {
     options: PreviewFrameOptions,
   ): SelectionPreview {
     const { parsed, head, body } = opened;
+    if (options.formPreview) new FormPreviewInjector().inject(body, options.formPreview);
     const directive = head.childNodes.find(
       (node): node is MarkupElement =>
         'tagName' in node &&

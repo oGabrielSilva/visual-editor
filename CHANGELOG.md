@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.3
+
+- Porta opcional `formPreview`: o host entrega uma prévia estática de cada formulário conectado e
+  o quadro a mostra dentro da caixa do formulário. A prévia é inerte, sem scripts nem ações, e
+  nunca entra no documento, na exportação ou no modo HTML.
+- Salvar não desativa mais a barra e o painel: só o botão espera, com indicador de carregamento,
+  e a edição continua enquanto o host grava.
+
 ## 1.0.2
 
 - Publicação pelo GitHub Actions com Trusted Publishing e proveniência do npm.

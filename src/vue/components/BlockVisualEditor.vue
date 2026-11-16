@@ -10,6 +10,8 @@ import type { EditorThemeOptions } from '../theme';
 import { EditorIconRegistry } from '../icons';
 import { EDITOR_PANEL_MEDIA_QUERY } from '../responsive-panel';
 import type { EditorImagePicker } from '../services/image-requests';
+import { FORM_PREVIEWS, FormPreviewCache } from '../services/form-preview';
+import type { EditorFormPreview } from '../services/form-preview';
 import type { EditorSavedBlocks } from '../services/saved-blocks';
 import type { PreviewWidth } from '../workbench';
 import type { EditorVariable } from '../variables';
@@ -40,6 +42,8 @@ const props = defineProps<{
   /** Blocks saved in the library of the host to use again; without it the palette has no such section. */
   savedBlocks?: EditorSavedBlocks;
   variables?: readonly EditorVariable[];
+  /** Pictures of the forms connected to the piece, shown in their slots while editing. */
+  formPreview?: EditorFormPreview;
   /** Test mode of the frame runtime. */
   diagnostics?: boolean;
 }>();
@@ -56,6 +60,9 @@ const workbench = createBlockWorkbench({
   failed: (code) => emit('error', code),
 });
 provide(BLOCK_WORKBENCH, workbench);
+const formPreviews = new FormPreviewCache(() => props.formPreview);
+provide(FORM_PREVIEWS, formPreviews);
+onBeforeUnmount(() => formPreviews.dispose());
 const { state, busy, feedback, width } = workbench;
 const t = workbench.t;
 const theme = computed(() => new EditorTheme(props.theme).variables());

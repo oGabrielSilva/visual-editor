@@ -21,3 +21,5 @@ export type {
   EditorSavedBlocks,
 } from './services/saved-blocks';
 export { SAVED_BLOCK_LIMITS } from './services/saved-blocks';
+export type { EditorFormPreview } from './services/form-preview';
+export { FORM_PREVIEW_LIMITS } from './services/form-preview';

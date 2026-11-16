@@ -26,7 +26,7 @@ const emit = defineEmits<{
   'request-form': [];
 }>();
 const workbench = useWorkbench();
-const { state, busy, width } = workbench;
+const { state, busy, saving, width } = workbench;
 const t = workbench.t;
 const fileInput = ref<HTMLInputElement>();
 const root = ref<HTMLElement>();
@@ -194,7 +194,8 @@ defineExpose({ trigger });
     <EditorButton
       intent="primary"
       icon="i-lucide-save"
-      :disabled="state.readOnly || busy"
+      :disabled="state.readOnly || busy || saving"
+      :loading="saving"
       @click="workbench.save()"
       >{{ t('actions.save') }}</EditorButton
     >

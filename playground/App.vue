@@ -26,6 +26,15 @@ const readOnly = ref(false);
 const dark = ref(false);
 const notice = ref('');
 const libraryOpen = ref(false);
+// A sample of the host's picture of a connected form: "Escolher formulário" connects one.
+const formPreview = {
+  preview: async () =>
+    '<div style="display:grid;gap:12px;padding:20px;border:1px solid #d4d4d8;border-radius:12px;background:#fff;text-align:left">' +
+    '<strong style="font-size:18px">Garanta sua vaga</strong>' +
+    '<label style="display:grid;gap:6px;font-size:14px">Nome<input placeholder="Seu nome" style="padding:8px;border:1px solid #d4d4d8;border-radius:6px"></label>' +
+    '<label style="display:grid;gap:6px;font-size:14px">E-mail<input placeholder="voce@empresa.com" style="padding:8px;border:1px solid #d4d4d8;border-radius:6px"></label>' +
+    '<button type="button" style="padding:10px;border:0;border-radius:6px;background:#0d9488;color:#fff;font-weight:600">Enviar</button></div>',
+};
 const library = new SampleImageLibrary((visible) => {
   libraryOpen.value = visible;
 });
@@ -118,7 +127,10 @@ onBeforeUnmount(() => {
         :variables="SAMPLE_VARIABLES"
         :selection-renderer="instance.selectionRenderer"
         v-bind="hostImages ? { imagePicker: library } : {}"
+        :form-preview="formPreview"
+        form-picker
         diagnostics
+        @request-form="(id) => instance.controller.connectFormReference('form_demo', id)"
       >
         <template #brand
           ><strong class="playground-brand">{{ messages.brand }}</strong></template

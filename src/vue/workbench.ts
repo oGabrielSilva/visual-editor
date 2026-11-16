@@ -68,6 +68,8 @@ export interface EditorWorkbench {
   readonly locale: ComputedRef<EditorLocale>;
   readonly feedback: Ref<string>;
   readonly busy: Ref<boolean>;
+  /** A save in flight: only the save button waits for it; editing goes on meanwhile. */
+  readonly saving: Ref<boolean>;
   readonly width: Ref<PreviewWidth>;
   readonly canvas: ShallowRef<CanvasApi | undefined>;
   readonly panelText: ShallowRef<PanelTextApi | undefined>;
@@ -116,6 +118,7 @@ export function createWorkbench(options: WorkbenchOptions): EditorWorkbench {
   const locale = computed(() => new EditorLocale(options.messages()));
   const feedback = ref('');
   const busy = ref(false);
+  const saving = ref(false);
   const width = ref<PreviewWidth>('desktop');
   const canvas = shallowRef<CanvasApi>();
   const panelText = shallowRef<PanelTextApi>();
@@ -199,9 +202,9 @@ export function createWorkbench(options: WorkbenchOptions): EditorWorkbench {
     documentHistory(direction);
   };
   const save = async (): Promise<void> => {
-    if (busy.value || state.value.readOnly) return;
+    if (saving.value || busy.value || state.value.readOnly) return;
     const owner = options.controller();
-    busy.value = true;
+    saving.value = true;
     try {
       await act(async () => {
         const persistence = owner.session.save();
@@ -216,7 +219,7 @@ export function createWorkbench(options: WorkbenchOptions): EditorWorkbench {
         return saved;
       }, 'feedback.saved');
     } finally {
-      if (options.controller() === owner) busy.value = false;
+      if (options.controller() === owner) saving.value = false;
     }
   };
   const shortcuts = new ShortcutService({
@@ -279,6 +282,7 @@ export function createWorkbench(options: WorkbenchOptions): EditorWorkbench {
       effectiveText.value = undefined;
       feedback.value = '';
       busy.value = false;
+      saving.value = false;
       commands.invalidate();
       images.cancel();
       templates.close();
@@ -305,6 +309,7 @@ export function createWorkbench(options: WorkbenchOptions): EditorWorkbench {
     locale,
     feedback,
     busy,
+    saving,
     width,
     canvas,
     panelText,

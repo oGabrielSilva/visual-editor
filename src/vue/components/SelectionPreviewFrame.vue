@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, shallowRef, ref, watch } from 'vue';
+import { inject, onBeforeUnmount, onMounted, shallowRef, ref, watch } from 'vue';
+import { FORM_PREVIEWS } from '../services/form-preview';
 import type { FramePreviewSource, SelectionPreview } from '../../renderers/selection-preview';
 import { normalizePreviewLanguage, PREVIEW_FRAMESET } from '../../renderers/selection-preview';
 import { FrameWindowGuard } from '../canvas/frame-window';
@@ -211,6 +212,8 @@ function dropDraft(): void {
   draftTimer = undefined;
   pendingDraft = undefined;
 }
+// Pictures of the connected forms, when the host offers them; a new one draws the window again.
+const formPreviews = inject(FORM_PREVIEWS, undefined);
 function options() {
   return {
     readOnly: props.readOnly ?? false,
@@ -222,6 +225,7 @@ function options() {
     ...(props.describe ? { describe: props.describe } : {}),
     ...(props.theme ? { theme: props.theme } : {}),
     ...(props.variables ? { variables: props.variables } : {}),
+    ...(formPreviews ? { formPreview: formPreviews.lookup } : {}),
   };
 }
 /** A new window: the first load, another document or controller, or a failed reconciliation. */
@@ -318,6 +322,7 @@ watch(
     () => props.labels,
     () => props.describe,
     () => props.variant,
+    () => formPreviews?.version.value,
   ],
   render,
 );

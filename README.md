@@ -108,6 +108,7 @@ A compilação MJML roda num worker Node com tempo e memória limitados.
 | `store` | Guardar a peça com controle de revisão (o host faz a concorrência). |
 | `imagePicker` | Escolher ou enviar imagens da biblioteca do host. |
 | `savedBlocks` | Listar, salvar e remover blocos reaproveitáveis. |
+| `formPreview` | Desenhar, só no quadro, uma prévia estática dos formulários conectados. |
 | `variables` | Catálogo de variáveis (`{{contact.firstName}}`) com nomes amigáveis. |
 | `messages` | Textos da interface; o padrão é pt-BR. |
 
